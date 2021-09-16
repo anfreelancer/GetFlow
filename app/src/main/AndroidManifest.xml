@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Adrian Miozga <AdrianMiozga@outlook.com>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.luteapp.getflow">
+
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <receiver android:name="com.luteapp.getflow.TimerActionReceiver" />
+
+        <activity
+            android:name="com.luteapp.getflow.MainActivity"
+            android:configChanges="orientation">
+        </activity>
+        <activity
+            android:name="com.luteapp.getflow.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+
+            <!-- enable the search widget to send searches to SearchableActivity -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.luteapp.getflow.ShopActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.luteapp.getflow.settings.SettingsActivity"
+            android:configChanges="orientation"
+            android:label="@string/settings"
+            android:parentActivityName="com.luteapp.getflow.MainActivity"
+            android:theme="@style/Theme.NoPreviewWindow" />
+
+        <activity
+            android:name="com.luteapp.getflow.statistics.StatisticsActivity"
+            android:configChanges="orientation"
+            android:label="@string/statistics"
+            android:parentActivityName="com.luteapp.getflow.MainActivity"
+            android:theme="@style/Theme.NoPreviewWindow" />
+
+        <activity
+            android:name="com.luteapp.getflow.applicationlock.ApplicationLockActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_lock"
+            android:parentActivityName="com.luteapp.getflow.settings.SettingsActivity"
+            android:theme="@style/Theme.NoPreviewWindow" />
+
+        <activity
+            android:name="com.luteapp.getflow.activities.Activities"
+            android:configChanges="orientation"
+            android:label="@string/activities_name"
+            android:parentActivityName="com.luteapp.getflow.MainActivity"
+            android:theme="@style/Theme.NoPreviewWindow"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name="com.luteapp.getflow.activities.ActivitySettings"
+            android:configChanges="orientation"
+            android:parentActivityName="com.luteapp.getflow.activities.Activities"
+            android:theme="@style/Theme.NoPreviewWindow"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name="com.luteapp.getflow.AboutActivity"
+            android:configChanges="orientation"
+            android:label="@string/about_activity_name"
+            android:parentActivityName="com.luteapp.getflow.MainActivity"
+            android:theme="@style/Theme.NoPreviewWindow" />
+
+        <service android:name="com.luteapp.getflow.NotificationService" />
+        <service android:name="com.luteapp.getflow.EndNotificationService" />
+
+        <service
+            android:name="com.luteapp.getflow.applicationlock.ApplicationLockService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+    </application>
+
+</manifest>
